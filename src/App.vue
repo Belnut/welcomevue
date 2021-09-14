@@ -5,10 +5,12 @@
   <div v-for="(product, i) in products" :key="i">
     <h4>{{products[i]}}</h4>
     <p>{{ prices[i] }} 만원</p>
+    <button @mouseover="increaseReport(i)">허위매물신고</button> <span>신고수 : {{신고수s[i]}}</span>
   </div>
 </template>
 
 <script>
+
 export default {
   name: 'App',
   data() {
@@ -16,6 +18,12 @@ export default {
       prices : [60, 70, 80],
       products : ['역삼동원룸', '천호동원룸', '마포구원룸'],
       menus : ['Home', 'Products', 'About'],
+      신고수s : [0, 0 , 0],
+    }
+  },
+  methods : {
+    increaseReport(i) {
+      this.신고수s[i]++;
     }
   },
   components: {
