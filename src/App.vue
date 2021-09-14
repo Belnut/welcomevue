@@ -1,11 +1,24 @@
 <template>
-  <div class="menu">
-    <a v-for="(작명, i) in menus" :key="i">{{i}} </a>
+  <div class="black-bg" v-if="isModalOpened">
+    <div class="white-bg">
+      <h4>상세페이지임</h4>
+      <p>상세페이지 내용임</p>
+      <button @click="isModalOpened = false">닫기</button>
+    </div>  
   </div>
+
+
+  <div class="menu">
+    <a v-for="(작명, i) in menus" :key="i">{{작명}} </a>
+  </div>
+
+
+
   <div v-for="(product, i) in products" :key="i">
-    <h4>{{products[i]}}</h4>
+    <img src="./assets/room0.jpg" class="room-img">
+    <h4 @click="isModalOpened = true">{{products[i]}}</h4>
     <p>{{ prices[i] }} 만원</p>
-    <button @mouseover="increaseReport(i)">허위매물신고</button> <span>신고수 : {{신고수s[i]}}</span>
+    <button @click="increaseReport(i)">허위매물신고</button> <span>신고수 : {{신고수s[i]}}</span>
   </div>
 </template>
 
@@ -15,6 +28,7 @@ export default {
   name: 'App',
   data() {
     return { 
+      isModalOpened : false,
       prices : [60, 70, 80],
       products : ['역삼동원룸', '천호동원룸', '마포구원룸'],
       menus : ['Home', 'Products', 'About'],
@@ -24,7 +38,7 @@ export default {
   methods : {
     increaseReport(i) {
       this.신고수s[i]++;
-    }
+    },
   },
   components: {
   }
@@ -48,5 +62,30 @@ export default {
 .menu a {
   color: white;
   padding: 10px;
+}
+.room-img {
+  width : 100%;
+  margin-top: 40px;
+}
+
+body {
+  margin: 0;
+}
+div {
+  box-sizing: border-box;
+}
+.black-bg {
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  position: fixed; padding: 20px;
+}
+.white-bg {
+  width: 100%; background: white;
+  border-radius: 8px;
+  padding: 20px;
+}
+.right-align {
+  float: right;
 }
 </style>
