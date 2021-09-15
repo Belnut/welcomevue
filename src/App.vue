@@ -14,25 +14,25 @@
 
 
 
-  <div v-for="(product, i) in products" :key="i">
-    <img src="./assets/room0.jpg" class="room-img">
-    <h4 @click="isModalOpened = true">{{products[i]}}</h4>
-    <p>{{ prices[i] }} 만원</p>
-    <button @click="increaseReport(i)">허위매물신고</button> <span>신고수 : {{신고수s[i]}}</span>
+  <div v-for="(oneroom, i) in onerooms" :key="i">
+    <img :src="oneroom.image" class="room-img">
+    <h4 @click="isModalOpened = true">{{oneroom.title}}</h4>
+    <p>{{ oneroom.price }}</p>
   </div>
 </template>
 
 <script>
+import onerooms from './data/oneroom.js';
 
 export default {
   name: 'App',
   data() {
     return { 
+      onerooms : onerooms,
       isModalOpened : false,
       prices : [60, 70, 80],
       products : ['역삼동원룸', '천호동원룸', '마포구원룸'],
       menus : ['Home', 'Products', 'About'],
-      신고수s : [0, 0 , 0],
     }
   },
   methods : {
