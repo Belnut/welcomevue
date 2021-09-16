@@ -1,8 +1,10 @@
 <template>
   <div class="black-bg" v-if="isModalOpened">
     <div class="white-bg">
-      <h4>상세페이지임</h4>
-      <p>상세페이지 내용임</p>
+      <h4>{{ target.title }}</h4>
+      <img :src="target.image" class="room-img">
+      <p>{{ target.content }}</p>
+      <p>{{ target.price }}</p>
       <button @click="isModalOpened = false">닫기</button>
     </div>  
   </div>
@@ -16,7 +18,7 @@
 
   <div v-for="(oneroom, i) in onerooms" :key="i">
     <img :src="oneroom.image" class="room-img">
-    <h4 @click="isModalOpened = true">{{oneroom.title}}</h4>
+    <h4 @click="openModal(i)">{{oneroom.title}}</h4>
     <p>{{ oneroom.price }}</p>
   </div>
 </template>
@@ -33,12 +35,17 @@ export default {
       prices : [60, 70, 80],
       products : ['역삼동원룸', '천호동원룸', '마포구원룸'],
       menus : ['Home', 'Products', 'About'],
+      target : undefined,
     }
   },
   methods : {
     increaseReport(i) {
       this.신고수s[i]++;
     },
+    openModal(i) {
+      this.target = onerooms[i];
+      this.isModalOpened = true;
+    }
   },
   components: {
   }
